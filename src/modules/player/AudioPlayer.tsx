@@ -7,11 +7,13 @@ import PauseIcon from './icons/Pause'
 import PlayIcon from './icons/Play'
 import Loader from './icons/Loader'
 import Time from './Time'
-import { setCycleNumPos } from './utils'
+import { cycleNumPos } from './utils'
 import PlaylistNavControls from './PlaylistNavControls'
 import { PlaylistItem, RepeatState } from './types'
 import PlaybackOptionsControls from './PlaybackOptionsControls'
 import theme from './theme'
+
+const widthTimeFormatSwitch = 248
 
 const AudioPlayer: React.FC<{
   playlist: PlaylistItem[]
@@ -24,6 +26,13 @@ const AudioPlayer: React.FC<{
   >(0)
   const [repeat, setRepeat] = useState<RepeatState>(RepeatState.norepeat)
   const [shuffle, setShuffle] = useState(false)
+
+  // List of already played tracks in a playlist.
+  const [shuffleList, setShuffleList] = useState<number[]>([])
+  useEffect(() => {
+    // Clean shuffle list when playlist changes.
+    setShuffleList([])
+  }, [playlist])
 
   const {
     ready, playing, togglePlayPause, ended, load,
@@ -39,15 +48,17 @@ const AudioPlayer: React.FC<{
     load({
       src: playlist[currentPlaylistPosition].url,
       html5: true,
-      format: 'mp3',
+      format: playlist[currentPlaylistPosition].format ?? 'mp3',
     })
+
+    setShuffleList([...shuffleList, currentPlaylistPosition])
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ended])
 
   const handleRepeat = () => {
     if (playlist.length > 1) {
-      setRepeat(setCycleNumPos(repeat, 1, 3))
+      setRepeat(cycleNumPos(repeat, 1, 3))
     } else {
       setRepeat(
         repeat === RepeatState.norepeat ? RepeatState.one : RepeatState.norepeat
@@ -65,7 +76,7 @@ const AudioPlayer: React.FC<{
       src: playlist[nextPlaylistPosition].url,
       autoplay: playing,
       html5: true,
-      format: 'mp3',
+      format: playlist[currentPlaylistPosition].format ?? 'mp3',
     })
     setCurrentPlaylistPosition(nextPlaylistPosition)
   }
@@ -77,6 +88,7 @@ const AudioPlayer: React.FC<{
     let nextPlaylistPosition = currentPlaylistPosition + 1
     if (nextPlaylistPosition >= playlist.length && repeat === RepeatState.all) {
       nextPlaylistPosition = 0
+      setShuffleList([])
     }
 
     if (nextPlaylistPosition < playlist.length) {
@@ -84,34 +96,30 @@ const AudioPlayer: React.FC<{
         src: playlist[nextPlaylistPosition].url,
         autoplay: forcePlaying || playing,
         html5: true,
-        format: 'mp3',
+        format: playlist[currentPlaylistPosition].format ?? 'mp3',
       })
       setCurrentPlaylistPosition(nextPlaylistPosition)
+      setShuffleList([...shuffleList, nextPlaylistPosition])
     }
   }
 
-  let PlayPauseIcon
-  switch (playing) {
-    case true:
-      PlayPauseIcon = PauseIcon
-      break
-    case false:
-      PlayPauseIcon = PlayIcon
-      break
-    default:
-      break
-  }
+  const PlayPauseIcon = playing ? PauseIcon : PlayIcon
 
   return (
     <ThemeProvider theme={theme}>
       <Container>
         {!ready && (
-          <PlayButton as="div">
+          <PlayButton as="div" data-testid="player-play-button-loading">
             <Loader size={40} />
           </PlayButton>
         )}
         {ready && (
-          <PlayButton type="button" onClick={togglePlayPause} aria-label="Play">
+          <PlayButton
+            type="button"
+            onClick={togglePlayPause}
+            aria-label="Play"
+            data-testid="player-play-button"
+          >
             <PlayPauseIcon size={40} />
           </PlayButton>
         )}
@@ -119,7 +127,7 @@ const AudioPlayer: React.FC<{
           <SongInfo ref={ref}>
             <SongTitle>{playlist[currentPlaylistPosition].title}</SongTitle>
             <TimeIndicator>
-              <Time remaining={width <= 248} />
+              <Time remaining={width <= widthTimeFormatSwitch} />
             </TimeIndicator>
           </SongInfo>
           <ProgressBar />
@@ -152,6 +160,7 @@ const AudioPlayer: React.FC<{
 }
 
 export default AudioPlayer
+export { widthTimeFormatSwitch }
 
 const Container = styled.div`
   padding: 6px;

@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { ThemeContext } from 'styled-components'
 import { PlayerTheme } from '../types'
 
-const Loader: React.FC<{ size: number }> = ({ size = 30 }) => {
+const Loader: React.FC<{ size?: number }> = ({ size = 30 }) => {
   const sizePx = `${size}px`
   const theme = useContext<PlayerTheme>(ThemeContext)
 
@@ -13,6 +13,7 @@ const Loader: React.FC<{ size: number }> = ({ size = 30 }) => {
       height={sizePx}
       viewBox="0 0 100 100"
       preserveAspectRatio="xMidYMid"
+      data-testid="player-loader-icon"
     >
       <circle
         cx="50"

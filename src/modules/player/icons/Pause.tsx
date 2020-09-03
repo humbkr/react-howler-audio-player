@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { ThemeContext } from 'styled-components'
 import { PlayerTheme } from '../types'
 
-const Pause: React.FC<{ size: number }> = ({ size = 30 }) => {
+const Pause: React.FC<{ size?: number }> = ({ size = 30 }) => {
   const sizePx = `${size}px`
   const theme = useContext<PlayerTheme>(ThemeContext)
 
@@ -17,6 +17,7 @@ const Pause: React.FC<{ size: number }> = ({ size = 30 }) => {
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
+      data-testid="player-pause-icon"
     >
       <rect x="5" y="3" width="5" height="18" />
       <rect x="14" y="3" width="5" height="18" />

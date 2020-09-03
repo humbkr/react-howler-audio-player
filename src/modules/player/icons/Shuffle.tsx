@@ -2,9 +2,9 @@ import React, { useContext } from 'react'
 import { ThemeContext } from 'styled-components'
 import { PlayerTheme } from '../types'
 
-const Shuffle: React.FC<{ size: number; active: boolean }> = ({
-  size,
-  active,
+const Shuffle: React.FC<{ size?: number; active?: boolean }> = ({
+  size = 30,
+  active = false,
 }) => {
   const sizePx = `${size}px`
   const theme = useContext<PlayerTheme>(ThemeContext)
@@ -24,6 +24,7 @@ const Shuffle: React.FC<{ size: number; active: boolean }> = ({
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
+      data-testid="player-shuffle-icon"
     >
       <polyline points="16 3 21 3 21 8" />
       <line x1="4" y1="20" x2="21" y2="3" />

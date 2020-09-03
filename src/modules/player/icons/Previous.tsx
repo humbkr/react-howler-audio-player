@@ -2,9 +2,9 @@ import React, { useContext } from 'react'
 import { ThemeContext } from 'styled-components'
 import { PlayerTheme } from '../types'
 
-const Previous: React.FC<{ size: number; enabled: boolean }> = ({
-  size,
-  enabled,
+const Previous: React.FC<{ size?: number; enabled?: boolean }> = ({
+  size = 30,
+  enabled = true,
 }) => {
   const sizePx = `${size}px`
   const theme = useContext<PlayerTheme>(ThemeContext)
@@ -28,6 +28,7 @@ const Previous: React.FC<{ size: number; enabled: boolean }> = ({
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
+      data-testid="player-previous-icon"
     >
       <polygon points="19 20 9 12 19 4 19 20" />
       <rect x="5" y="5" width="2" height="14" />

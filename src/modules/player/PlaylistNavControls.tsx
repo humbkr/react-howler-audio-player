@@ -20,6 +20,7 @@ const PlaylistNavControls: React.FC<{
       onClick={onPrev}
       disabled={disablePrev}
       aria-label="Previous song"
+      data-testid="player-prev-button"
     >
       <SkipPrevIcon enabled={!disablePrev} size={18} />
     </PlaylistNavButton>
@@ -28,6 +29,7 @@ const PlaylistNavControls: React.FC<{
       onClick={onNext}
       disabled={disableNext}
       aria-label="Next song"
+      data-testid="player-next-button"
     >
       <SkipNextIcon enabled={!disableNext} size={18} />
     </PlaylistNavButton>

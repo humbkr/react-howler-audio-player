@@ -16,11 +16,13 @@
     "lint-check": "prettier-eslint --list-different $PWD/'src/**/*.{js,jsx,ts,tsx}'"
   },
   "dependencies": {
+    "eslint-plugin-jest": "^23.20.0",
+    "jest-styled-components": "^7.0.3",
     "normalize.css": "^8.0.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.3",
-    "react-use-audio-player": "^1.0.0",
+    "react-use-audio-player": "^1.0.1",
     "react-use-dimensions": "^1.2.1",
     "styled-components": "^5.1.1"
   },

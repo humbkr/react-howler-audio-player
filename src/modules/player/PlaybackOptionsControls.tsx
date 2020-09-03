@@ -4,6 +4,18 @@ import Repeat from './icons/Repeat'
 import Shuffle from './icons/Shuffle'
 import { RepeatState } from './types'
 
+const getRepeatStateLabel = (repeatState: RepeatState): string => {
+  switch (repeatState) {
+    case RepeatState.all:
+      return 'all'
+    case RepeatState.one:
+      return 'one'
+    case RepeatState.norepeat:
+    default:
+      return 'none'
+  }
+}
+
 const PlaybackOptionsControls: React.FC<{
   repeatState: RepeatState
   onRepeat: () => void
@@ -13,11 +25,12 @@ const PlaybackOptionsControls: React.FC<{
 }> = ({
   repeatState, onRepeat, shuffleState, onShuffle, displayShuffle,
 }) => (
-  <Container>
+  <Container data-testid={`player-repeat-${getRepeatStateLabel(repeatState)}`}>
     <PlaybackOptionButton
       type="button"
       onClick={onRepeat}
       aria-label="Repeat"
+      data-testid="player-repeat-button"
     >
       <Repeat
         size={18}
@@ -26,13 +39,16 @@ const PlaybackOptionsControls: React.FC<{
       />
     </PlaybackOptionButton>
     {displayShuffle && (
-    <PlaybackOptionButton
-      type="button"
-      onClick={onShuffle}
-      aria-label="Shuffle"
-    >
-      <Shuffle size={18} active={shuffleState} />
-    </PlaybackOptionButton>
+      <PlaybackOptionButton
+        type="button"
+        onClick={onShuffle}
+        aria-label="Shuffle"
+        data-testid={`player-shuffle-button-${
+          shuffleState ? 'enabled' : 'disabled'
+        }`}
+      >
+        <Shuffle size={18} active={shuffleState} />
+      </PlaybackOptionButton>
     )}
   </Container>
 )

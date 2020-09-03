@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { ThemeContext } from 'styled-components'
 import { PlayerTheme } from '../types'
 
-const VolumeLow: React.FC<{ size: number }> = ({ size = 30 }) => {
+const VolumeLow: React.FC<{ size?: number }> = ({ size = 30 }) => {
   const sizePx = `${size}px`
   const theme = useContext<PlayerTheme>(ThemeContext)
 
@@ -17,6 +17,7 @@ const VolumeLow: React.FC<{ size: number }> = ({ size = 30 }) => {
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
+      data-testid="player-volume-low-icon"
     >
       <polygon
         points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"

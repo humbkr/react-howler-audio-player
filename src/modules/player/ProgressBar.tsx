@@ -31,8 +31,12 @@ const ProgressBar: React.FC = () => {
       ref={container}
       onClick={handleOnClick}
       aria-label="Progress bar"
+      data-testid="player-progress-bar"
     >
-      <Progress style={{ width: `${percent}%` }} />
+      <Progress
+        style={{ width: `${percent}%` }}
+        data-testid="player-progress-bar-status"
+      />
     </Container>
   )
 }
