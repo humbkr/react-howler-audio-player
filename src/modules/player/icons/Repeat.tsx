@@ -31,7 +31,15 @@ const Repeat: React.FC<{
       <path d="M3 11V9a4 4 0 0 1 4-4h14" />
       <polyline points="7 23 3 19 7 15" />
       <path d="M21 13v2a4 4 0 0 1-4 4H3" />
-      {repeatOne && <rect x="11.5" y="8.5" width="1" height="7" />}
+      {repeatOne && (
+        <rect
+          x="11.5"
+          y="8.5"
+          width="1"
+          height="7"
+          data-testid="player-repeat-icon-one"
+        />
+      )}
     </svg>
   )
 }
