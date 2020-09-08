@@ -9506,6 +9506,11 @@ react-scripts@3.4.3:
   optionalDependencies:
     fsevents "2.1.2"
 
+react-slider@^1.0.8:
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/react-slider/-/react-slider-1.0.8.tgz#a60877ca9acd18f61fce6786346223aedceff053"
+  integrity sha512-GXnw6b7V3yeGiaOZJeQHbdOmQT+z5LlYni+3g1C0vAfKtdoQEO/fW2Iesz7ZEIt/Lf5E5hW5UsRbAiWQkZU+GA==
+
 react-use-audio-player@^1.0.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/react-use-audio-player/-/react-use-audio-player-1.1.1.tgz#282f83e741ef8dad7b53e992d70e41afda1163d3"

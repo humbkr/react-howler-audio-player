@@ -1,6 +1,4 @@
-import React, {
-  useCallback, useEffect, useMemo, useState,
-} from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import styled, { ThemeProvider } from 'styled-components'
 import { useAudioPlayer } from 'react-use-audio-player'
 import useDimensions from 'react-use-dimensions'
@@ -14,6 +12,7 @@ import PlaylistNavControls from './PlaylistNavControls'
 import { PlaylistItem, RepeatState } from './types'
 import PlaybackOptionsControls from './PlaybackOptionsControls'
 import theme from './theme'
+import Volume from './Volume'
 
 const widthTimeFormatSwitch = 248
 
@@ -205,13 +204,16 @@ const AudioPlayer: React.FC<{
                 onNext={handleNext}
               />
             )}
-            <PlaybackOptionsControls
-              repeatState={repeat}
-              onRepeat={handleRepeat}
-              shuffleState={shuffle}
-              onShuffle={handleShuffle}
-              displayShuffle={playlist.length > 1}
-            />
+            <ControlsEnd>
+              <PlaybackOptionsControls
+                repeatState={repeat}
+                onRepeat={handleRepeat}
+                shuffleState={shuffle}
+                onShuffle={handleShuffle}
+                displayShuffle={playlist.length > 1}
+              />
+              <Volume />
+            </ControlsEnd>
           </Controls>
         </Secondary>
       </Container>
@@ -273,4 +275,7 @@ const Controls = styled.div`
   display: flex;
   margin-left: -1px;
   justify-content: space-between;
+`
+const ControlsEnd = styled.div`
+  display: flex;
 `

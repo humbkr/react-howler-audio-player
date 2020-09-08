@@ -61,6 +61,7 @@ const mockPlaylistLong: PlaylistItem[] = [
 
 const mockTogglePlayPause = jest.fn()
 const mockLoad = jest.fn()
+const mockVolume = jest.fn()
 
 const mockUseAudioPlayerDefaultValue = {
   ready: false,
@@ -68,6 +69,7 @@ const mockUseAudioPlayerDefaultValue = {
   togglePlayPause: mockTogglePlayPause,
   ended: false,
   load: mockLoad,
+  volume: mockVolume,
 }
 
 jest.mock('react-use-audio-player', () => ({
@@ -117,6 +119,7 @@ describe('AudioPlayer', () => {
         togglePlayPause: mockTogglePlayPause,
         ended: false,
         load: mockLoad,
+        volume: mockVolume,
       })
 
       render(
@@ -142,6 +145,7 @@ describe('AudioPlayer', () => {
         togglePlayPause: mockTogglePlayPause,
         ended: false,
         load: mockLoad,
+        volume: mockVolume,
       })
 
       render(
@@ -239,6 +243,7 @@ describe('AudioPlayer', () => {
         togglePlayPause: mockTogglePlayPause,
         ended: true,
         load: mockLoad,
+        volume: mockVolume,
       })
 
       render(
@@ -257,6 +262,7 @@ describe('AudioPlayer', () => {
         togglePlayPause: mockTogglePlayPause,
         ended: true,
         load: mockLoad,
+        volume: mockVolume,
       })
 
       render(
