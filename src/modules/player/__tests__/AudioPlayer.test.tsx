@@ -284,7 +284,7 @@ describe('AudioPlayer', () => {
       )
 
       // Enable repeat all.
-      userEvent.click(screen.getByTestId('player-repeat-button'))
+      userEvent.click(screen.getByTestId('player-repeat-button-none'))
 
       expect(screen.getByTestId('player-prev-button')).toBeEnabled()
       expect(screen.getByTestId('player-next-button')).toBeEnabled()
@@ -298,7 +298,7 @@ describe('AudioPlayer', () => {
       )
 
       // Enable repeat all.
-      userEvent.click(screen.getByTestId('player-repeat-button'))
+      userEvent.click(screen.getByTestId('player-repeat-button-none'))
 
       // Go to last track.
       userEvent.click(screen.getByTestId('player-next-button'))
@@ -315,19 +315,23 @@ describe('AudioPlayer', () => {
         </ThemeProvider>
       )
 
-      expect(screen.getByTestId('player-repeat-none')).toBeInTheDocument()
+      expect(
+        screen.getByTestId('player-repeat-button-none')
+      ).toBeInTheDocument()
 
       // Enable repeat all.
-      userEvent.click(screen.getByTestId('player-repeat-button'))
-      expect(screen.getByTestId('player-repeat-all')).toBeInTheDocument()
+      userEvent.click(screen.getByTestId('player-repeat-button-none'))
+      expect(screen.getByTestId('player-repeat-button-all')).toBeInTheDocument()
 
       // Enable repeat one.
-      userEvent.click(screen.getByTestId('player-repeat-button'))
-      expect(screen.getByTestId('player-repeat-one')).toBeInTheDocument()
+      userEvent.click(screen.getByTestId('player-repeat-button-all'))
+      expect(screen.getByTestId('player-repeat-button-one')).toBeInTheDocument()
 
       // Disable repeat.
-      userEvent.click(screen.getByTestId('player-repeat-button'))
-      expect(screen.getByTestId('player-repeat-none')).toBeInTheDocument()
+      userEvent.click(screen.getByTestId('player-repeat-button-one'))
+      expect(
+        screen.getByTestId('player-repeat-button-none')
+      ).toBeInTheDocument()
     })
 
     it('toggles between repeat none and repeat one when repeat button is pressed and there is only 1 track in the playlist', () => {
@@ -337,15 +341,19 @@ describe('AudioPlayer', () => {
         </ThemeProvider>
       )
 
-      expect(screen.getByTestId('player-repeat-none')).toBeInTheDocument()
+      expect(
+        screen.getByTestId('player-repeat-button-none')
+      ).toBeInTheDocument()
 
       // Enable repeat one.
-      userEvent.click(screen.getByTestId('player-repeat-button'))
-      expect(screen.getByTestId('player-repeat-one')).toBeInTheDocument()
+      userEvent.click(screen.getByTestId('player-repeat-button-none'))
+      expect(screen.getByTestId('player-repeat-button-one')).toBeInTheDocument()
 
       // Disable repeat.
-      userEvent.click(screen.getByTestId('player-repeat-button'))
-      expect(screen.getByTestId('player-repeat-none')).toBeInTheDocument()
+      userEvent.click(screen.getByTestId('player-repeat-button-one'))
+      expect(
+        screen.getByTestId('player-repeat-button-none')
+      ).toBeInTheDocument()
     })
 
     it('loops to the first track when next button is pressed while the last track is playing and repeat all is active', () => {
@@ -356,8 +364,8 @@ describe('AudioPlayer', () => {
       )
 
       // Enable repeat all.
-      userEvent.click(screen.getByTestId('player-repeat-button'))
-      expect(screen.getByTestId('player-repeat-all')).toBeInTheDocument()
+      userEvent.click(screen.getByTestId('player-repeat-button-none'))
+      expect(screen.getByTestId('player-repeat-button-all')).toBeInTheDocument()
 
       // Go to last track.
       userEvent.click(screen.getByTestId('player-next-button'))
@@ -377,8 +385,8 @@ describe('AudioPlayer', () => {
       )
 
       // Enable repeat all.
-      userEvent.click(screen.getByTestId('player-repeat-button'))
-      expect(screen.getByTestId('player-repeat-all')).toBeInTheDocument()
+      userEvent.click(screen.getByTestId('player-repeat-button-none'))
+      expect(screen.getByTestId('player-repeat-button-all')).toBeInTheDocument()
 
       userEvent.click(screen.getByTestId('player-prev-button'))
       expect(screen.getByText(mockPlaylist[2].title)).toBeInTheDocument()
@@ -473,8 +481,8 @@ describe('AudioPlayer', () => {
       userEvent.click(screen.getByTestId('player-shuffle-button-disabled'))
 
       // Enable repeat all.
-      userEvent.click(screen.getByTestId('player-repeat-button'))
-      expect(screen.getByTestId('player-repeat-all')).toBeInTheDocument()
+      userEvent.click(screen.getByTestId('player-repeat-button-none'))
+      expect(screen.getByTestId('player-repeat-button-all')).toBeInTheDocument()
 
       // Play all the tracks.
       userEvent.click(screen.getByTestId('player-next-button'))
@@ -628,8 +636,8 @@ describe('AudioPlayer', () => {
       userEvent.click(screen.getByTestId('player-shuffle-button-disabled'))
 
       // Enable repeat all.
-      userEvent.click(screen.getByTestId('player-repeat-button'))
-      expect(screen.getByTestId('player-repeat-all')).toBeInTheDocument()
+      userEvent.click(screen.getByTestId('player-repeat-button-none'))
+      expect(screen.getByTestId('player-repeat-button-all')).toBeInTheDocument()
 
       // Play all the tracks.
       userEvent.click(screen.getByTestId('player-next-button'))
@@ -655,8 +663,8 @@ describe('AudioPlayer', () => {
       userEvent.click(screen.getByTestId('player-shuffle-button-disabled'))
 
       // Enable repeat all.
-      userEvent.click(screen.getByTestId('player-repeat-button'))
-      expect(screen.getByTestId('player-repeat-all')).toBeInTheDocument()
+      userEvent.click(screen.getByTestId('player-repeat-button-none'))
+      expect(screen.getByTestId('player-repeat-button-all')).toBeInTheDocument()
 
       // Play all the tracks.
       userEvent.click(screen.getByTestId('player-next-button'))

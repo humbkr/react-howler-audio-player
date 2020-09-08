@@ -1,4 +1,6 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, {
+  useCallback, useContext, useEffect, useState,
+} from 'react'
 import styled, { ThemeProvider } from 'styled-components'
 import { useAudioPlayer } from 'react-use-audio-player'
 import useDimensions from 'react-use-dimensions'
@@ -13,6 +15,7 @@ import { PlaylistItem, RepeatState } from './types'
 import PlaybackOptionsControls from './PlaybackOptionsControls'
 import theme from './theme'
 import Volume from './Volume'
+import { PlayerOptionsContext } from './context'
 
 const widthTimeFormatSwitch = 248
 
@@ -21,6 +24,8 @@ const AudioPlayer: React.FC<{
 }> = ({ playlist }) => {
   // TODO: Test the impact on performance.
   const [ref, { width }] = useDimensions()
+
+  const playerOptions = useContext(PlayerOptionsContext)
 
   const {
     ready, playing, togglePlayPause, ended, load,
@@ -204,6 +209,7 @@ const AudioPlayer: React.FC<{
                 onNext={handleNext}
               />
             )}
+            {playlist.length === 1 && <div />}
             <ControlsEnd>
               <PlaybackOptionsControls
                 repeatState={repeat}
@@ -212,7 +218,7 @@ const AudioPlayer: React.FC<{
                 onShuffle={handleShuffle}
                 displayShuffle={playlist.length > 1}
               />
-              <Volume />
+              {playerOptions.canChangeVolume && <Volume />}
             </ControlsEnd>
           </Controls>
         </Secondary>
