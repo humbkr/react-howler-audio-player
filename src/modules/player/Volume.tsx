@@ -5,14 +5,12 @@ import { useAudioPlayer } from 'react-use-audio-player'
 import VolumeLow from './icons/VolumeLow'
 import VolumeHigh from './icons/VolumeHigh'
 import Mute from './icons/Mute'
-import PauseIcon from './icons/Pause'
-import PlayIcon from './icons/Play'
 
 // eslint-disable-next-line react/jsx-props-no-spreading
 const Thumb = (props) => <StyledThumb {...props} />
-// eslint-disable-next-line react/jsx-props-no-spreading
 const Track = (props, state) => (
   <StyledTrack
+    // eslint-disable-next-line react/jsx-props-no-spreading
     {...props}
     index={state.index}
     data-testid="volume-slider-track"
@@ -125,6 +123,7 @@ const StyledThumb = styled.div`
 const StyledTrack = styled.div`
   top: 0;
   bottom: 0;
+  right: 0;
   background: ${(props) => (props.index === 1
     ? props.theme.volume.barColor
     : props.theme.volume.barVolumeColor)};
